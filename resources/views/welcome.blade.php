@@ -34,6 +34,7 @@
     fetch(API_URL)
     .then(res=>res.json())
     .then(response=>{
+      console.log(response);
         const table = document.getElementById('usersTable');
         table.innerHTML = '';
         if(response.data.length == 0){

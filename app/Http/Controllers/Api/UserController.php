@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\HttP\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -19,7 +20,7 @@ class UserController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'data fetched successfully',
-            'data' => $users
+            'data' => UserResource::collection($users)     
         ], 200);
     }
 
@@ -38,7 +39,7 @@ public function store(Request $request)
     return response()->json([
         'status' => true,
         'message' => 'User created successfully',
-        'data' => $user
+        'data' => new UserResource($user)
     ], 201);
 }
 
@@ -62,7 +63,7 @@ public function update(Request $request,$id){
         return response()->json([
             'status' => true,
             'message' => 'User updated successfully',
-            'data' => $user
+            'data' => new UserResource($user)
         ], 200);
     }else{
         return response()->json([
@@ -108,7 +109,7 @@ public function toggleStatus($id){
     return response()->json([
         'status' => true,
         'message' => 'user status updated successfully',
-        'data' => $user
+        'data' => new UserResource($user)
     ], 200);
 
 }
