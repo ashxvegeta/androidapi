@@ -3,6 +3,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AuthController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,19 @@ Route::post('/users', [UserController::class, 'store']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 Route::patch('/users/{id}/toggle-status', [UserController::class, 'toggleStatus']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->get('/profile',function(Request $request){
+    return response()->json([
+    'status'=>true,
+    'user'=>$request->user()
+    ]);
+});
+Route::middleware('auth:sanctum')->post('/logout',function (Request $request) {
+   $request->user()->currentAccessToken()->delete();
+   return response()->json([
+        'status'=>true,
+         'message'=>'Logout Successfull'
+   ]);
+});
 
