@@ -26,7 +26,8 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 Route::patch('/users/{id}/toggle-status', [UserController::class, 'toggleStatus']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::middleware('auth:sanctum')->get('/profile',function(Request $request){
+// http://127.0.0.1:8000/api/profile  put with bearer token Content-Type application json  Accept application json
+Route::middleware(['auth:sanctum','throttle:10,1'])->get('/profile',function(Request $request){
     return response()->json([
     'status'=>true,
     'user'=>$request->user()
