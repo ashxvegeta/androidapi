@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\ApiProductController;
 use Illuminate\Http\Request;
 
 /*
@@ -19,3 +20,4 @@ use Illuminate\Http\Request;
 
 
 Route::get('/categories', [ApiController::class, 'getCategories']);
+Route::get('/recenetproducts',[ApiProductController::class,'recentProducts']);

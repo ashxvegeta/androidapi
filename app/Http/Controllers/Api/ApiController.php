@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Ecomcategory;
 
 
 class ApiController extends Controller
@@ -17,7 +17,7 @@ class ApiController extends Controller
             return url('storage/icons/' . $value);
         }
     public function getCategories(){
-        $categorydata = Category::all();
+        $categorydata = Ecomcategory::all();
         return response()->json([
             'status'=>'success',
              'categories'=> $categorydata
